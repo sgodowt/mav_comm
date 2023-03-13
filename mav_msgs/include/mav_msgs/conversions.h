@@ -523,6 +523,19 @@ inline void msgMultiDofJointTrajectoryFromPositionYaw(
   msgMultiDofJointTrajectoryFromEigen(point, msg);
 }
 
+// Convenience method to quickly create a trajectory from a single waypoint.
+inline void msgMultiDofJointTrajectoryFromPositionYawrate(
+    const Eigen::Vector3d& position, double yawrate,
+    trajectory_msgs::MultiDOFJointTrajectory* msg) {
+  assert(msg != NULL);
+
+  EigenTrajectoryPoint point;
+  point.position_W = position;
+  point.setFromYawRate(yawrate);
+
+  msgMultiDofJointTrajectoryFromEigen(point, msg);
+}
+
 inline void msgMultiDofJointTrajectoryFromEigen(
     const EigenTrajectoryPointVector& trajectory, const std::string& link_name,
     trajectory_msgs::MultiDOFJointTrajectory* msg) {
